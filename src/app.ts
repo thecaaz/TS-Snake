@@ -5,11 +5,14 @@ import Apple from './Classes/Apple'
 import Settings from './settings'
 import Player from './Classes/Player'
 import IDrawable from './Interfaces/IDrawable'
+import IGameObject from './Interfaces/IGameObject'
 
 const player = new Player()
-let apple = new Apple()
+const player2 = new Player()
+let apple = new Apple(player)
 
-const drawables: IDrawable[] = [player, apple]
+const drawables: IDrawable[] = [player, apple, player2]
+const gameObjects: IGameObject[] = [player, player2, apple]
 
 setInterval(gameTick, 1000 / Settings.fps)
 
@@ -20,9 +23,7 @@ function gameTick() {
 
   player.tail.push(new Point(player.x, player.y))
 
-  player.tick()
-
-  checkAppleCollision()
+  gameObjects.forEach(x => x.tick())
 
   drawables.forEach(x => x.draw())
 }
@@ -51,11 +52,4 @@ document.onkeydown = function (key) {
 function drawBackground() {
   Settings.ctx.fillStyle = 'black'
   Settings.ctx.fillRect(0, 0, Settings.sizeX, Settings.sizeY)
-}
-
-function checkAppleCollision() {
-  if (player.x == apple.x && player.y == apple.y) {
-    apple.move()
-    Settings.tailLength++
-  }
 }

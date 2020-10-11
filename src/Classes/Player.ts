@@ -2,11 +2,12 @@ import { Direction } from './Enums'
 import Point from './Point'
 import Settings from '../settings'
 import IDrawable from '../Interfaces/IDrawable'
+import IGameObject from '../Interfaces/IGameObject'
 
-export default class Player extends Point implements IDrawable {
-  vel: Number
+export default class Player extends Point implements IDrawable, IGameObject {
+  vel: number
   tail: Point[]
-  tailLength: Number
+  tailLength: number
   direction: Direction
   nextDirection: Direction
 
@@ -55,7 +56,8 @@ export default class Player extends Point implements IDrawable {
       this.y = 0
     }
     if (this.y < 0) {
-      this.y = Settings.sizeY - Settings.boxSize
+      debugger
+      this.y = Settings.sizeY - this.vel
     }
   }
 

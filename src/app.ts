@@ -7,6 +7,7 @@ import Player from './Classes/Player'
 import IDrawable from './Interfaces/IDrawable'
 import IGameObject from './Interfaces/IGameObject'
 
+debugger
 const player = new Player()
 const player2 = new Player()
 let apple = new Apple(player)
@@ -20,8 +21,6 @@ function gameTick() {
   player.direction = player.nextDirection
 
   drawBackground()
-
-  player.tail.push(new Point(player.x, player.y))
 
   gameObjects.forEach(x => x.tick())
 

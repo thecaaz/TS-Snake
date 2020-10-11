@@ -22,6 +22,7 @@ export default class Player extends Point implements IDrawable, IGameObject {
   }
 
   tick() {
+    this.tail.push(new Point(this.x, this.y))
     this.setDirection()
     this.boundsCheck()
     this.manageTail()
@@ -49,7 +50,7 @@ export default class Player extends Point implements IDrawable, IGameObject {
       this.x = 0
     }
     if (this.x < 0) {
-      this.x = Settings.sizeX - Settings.boxSize * 2
+      this.x = Settings.sizeX - this.vel * 2
     }
 
     if (this.y >= Settings.sizeY) {

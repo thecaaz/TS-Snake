@@ -1,8 +1,9 @@
 import { Direction } from './Enums'
 import Point from './Point'
 import Settings from '../settings'
+import IDrawable from '../Interfaces/IDrawable'
 
-export default class Player extends Point {
+export default class Player extends Point implements IDrawable {
   vel: Number
   tail: Point[]
   tailLength: Number
@@ -17,6 +18,12 @@ export default class Player extends Point {
     this.tail = []
     this.tailLength = 4
     this.vel = Settings.vel
+  }
+
+  tick() {
+    this.setDirection()
+    this.boundsCheck()
+    this.manageTail()
   }
 
   setDirection(): void {
@@ -52,16 +59,6 @@ export default class Player extends Point {
     }
   }
 
-  move() {
-    Settings.ctx.fillStyle = 'blue'
-    Settings.ctx.fillRect(
-      this.x,
-      this.y,
-      Settings.boxSize * 2,
-      Settings.boxSize
-    )
-  }
-
   manageTail() {
     if (this.tail.find(p => p.x == this.x && p.y == this.y)) {
       this.tailLength = 4
@@ -80,5 +77,15 @@ export default class Player extends Point {
         Settings.boxSize
       )
     }
+  }
+
+  draw(): void {
+    Settings.ctx.fillStyle = 'blue'
+    Settings.ctx.fillRect(
+      this.x,
+      this.y,
+      Settings.boxSize * 2,
+      Settings.boxSize
+    )
   }
 }

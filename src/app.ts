@@ -4,66 +4,58 @@ import Point from './Classes/Point'
 import Apple from './Classes/Apple'
 import Settings from './settings'
 import Player from './Classes/Player'
+import IDrawable from './Interfaces/IDrawable'
 
 const player = new Player()
-let apple = new Apple(Settings.sizeX, Settings.sizeY, Settings.boxSize)
+let apple = new Apple()
+
+const drawables: IDrawable[] = [player, apple]
+
 setInterval(gameTick, 1000 / Settings.fps)
 
 function gameTick() {
   player.direction = player.nextDirection
 
-  Settings.ctx.fillStyle = 'black'
-  Settings.ctx.fillRect(0, 0, Settings.sizeX, Settings.sizeY)
+  drawBackground()
 
   player.tail.push(new Point(player.x, player.y))
 
-  player.setDirection()
-
-  player.boundsCheck()
-
-  player.move()
-
-  player.manageTail()
+  player.tick()
 
   checkAppleCollision()
 
-  drawApple()
+  drawables.forEach(x => x.draw())
 }
 
 document.onkeydown = function (key) {
   switch (key.code) {
     case 'ArrowUp':
       if (player.direction != Direction.Down)
-      player.nextDirection = Direction.Up
+        player.nextDirection = Direction.Up
       break
     case 'ArrowLeft':
       if (player.direction != Direction.Right)
-      player.nextDirection = Direction.Left
+        player.nextDirection = Direction.Left
       break
     case 'ArrowRight':
       if (player.direction != Direction.Left)
-      player.nextDirection = Direction.Right
+        player.nextDirection = Direction.Right
       break
     case 'ArrowDown':
       if (player.direction != Direction.Up)
-      player.nextDirection = Direction.Down
+        player.nextDirection = Direction.Down
       break
   }
+}
+
+function drawBackground() {
+  Settings.ctx.fillStyle = 'black'
+  Settings.ctx.fillRect(0, 0, Settings.sizeX, Settings.sizeY)
 }
 
 function checkAppleCollision() {
   if (player.x == apple.x && player.y == apple.y) {
-    apple = new Apple(Settings.sizeX, Settings.sizeY, Settings.boxSize)
+    apple.move()
     Settings.tailLength++
   }
-}
-
-function drawApple() {
-  Settings.ctx.fillStyle = 'red'
-  Settings.ctx.fillRect(
-    apple.x,
-    apple.y,
-    Settings.boxSize * 2,
-    Settings.boxSize
-  )
 }

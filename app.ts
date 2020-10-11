@@ -17,6 +17,7 @@ let x = 140
 let y = 70
 
 let direction = Direction.Right
+let nextDirection: Direction = direction
 
 let vel = 10
 
@@ -24,6 +25,8 @@ let tail: Point[] = []
 let tailLength = 4
 
 function tick() {
+  direction = nextDirection
+
   ctx.fillStyle = 'black'
   ctx.fillRect(0, 0, sizeX, sizeY)
 
@@ -61,7 +64,7 @@ function tick() {
   ctx.fillStyle = 'blue'
   ctx.fillRect(x, y, boxSize * 2, boxSize)
 
-  if (tail.find((p) => p.x == x && p.y == y)) {
+  if (tail.find(p => p.x == x && p.y == y)) {
     tailLength = 4
   }
 
@@ -86,16 +89,16 @@ function tick() {
 document.onkeydown = function (key) {
   switch (key.code) {
     case 'ArrowUp':
-      if (direction != Direction.Down) direction = Direction.Up
+      if (direction != Direction.Down) nextDirection = Direction.Up
       break
     case 'ArrowLeft':
-      if (direction != Direction.Right) direction = Direction.Left
+      if (direction != Direction.Right) nextDirection = Direction.Left
       break
     case 'ArrowRight':
-      if (direction != Direction.Left) direction = Direction.Right
+      if (direction != Direction.Left) nextDirection = Direction.Right
       break
     case 'ArrowDown':
-      if (direction != Direction.Up) direction = Direction.Down
+      if (direction != Direction.Up) nextDirection = Direction.Down
       break
   }
 }

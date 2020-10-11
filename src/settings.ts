@@ -9,11 +9,6 @@ class Settings {
   sizeX: number
   sizeY: number
   boxSize: number
-  apple: Apple
-  x: number
-  y: number
-  direction: Direction
-  nextDirection: Direction
   vel: number
   tail: Point[]
   tailLength: number
@@ -26,14 +21,6 @@ class Settings {
     this.sizeX = 300
     this.sizeY = 150
     this.boxSize = 9
-
-    this.apple = new Apple(this.sizeX, this.sizeX, this.boxSize)
-
-    this.x = 140
-    this.y = 70
-
-    this.direction = Direction.Right
-    this.nextDirection = this.direction
 
     this.vel = 10
 

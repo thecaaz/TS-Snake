@@ -1,32 +1,16 @@
-import Apple from './Classes/Apple'
-import { Direction } from './Classes/Enums'
-import Point from './Classes/Point'
 import { get2dContext } from './setup'
+import Settings from './Classes/Settings'
 
-class Settings {
-  ctx: CanvasRenderingContext2D
-  fps: number
-  sizeX: number
-  sizeY: number
-  boxSize: number
-  vel: number
-  tail: Point[]
-  tailLength: number
+var globalSettings = new Settings(get2dContext())
 
-  constructor() {
-    this.ctx = get2dContext()
+globalSettings.fps = 5
 
-    this.fps = 5
+globalSettings.sizeX = 300
+globalSettings.sizeY = 150
+globalSettings.boxSize = 9
 
-    this.sizeX = 300
-    this.sizeY = 150
-    this.boxSize = 9
+globalSettings.vel = 10
 
-    this.vel = 10
+globalSettings.tailLength = 4
 
-    this.tail = []
-    this.tailLength = 4
-  }
-}
-
-export default new Settings()
+export default globalSettings

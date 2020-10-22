@@ -12,7 +12,7 @@ export default class Player extends Point implements IDrawable, IGameObject {
   nextDirection: Direction
 
   constructor() {
-    super(140, 70)
+    super(240, 240)
 
     this.direction = Direction.Right
     this.nextDirection = this.direction
@@ -37,29 +37,22 @@ export default class Player extends Point implements IDrawable, IGameObject {
         this.y = this.y + Settings.vel
         break
       case Direction.Left:
-        this.x = this.x - Settings.vel * 2
+        this.x = this.x - Settings.vel
         break
       case Direction.Right:
-        this.x = this.x + Settings.vel * 2
+        this.x = this.x + Settings.vel
         break
     }
   }
 
   boundsCheck() {
-    if (this.x >= Settings.sizeX) {
-      this.x = 0
-    }
-    if (this.x < 0) {
-      this.x = Settings.sizeX - this.vel * 2
-    }
+    if (this.x >= Settings.sizeX) this.x = 0
 
-    if (this.y >= Settings.sizeY) {
-      this.y = 0
-    }
-    if (this.y < 0) {
-      debugger
-      this.y = Settings.sizeY - this.vel
-    }
+    if (this.x < 0) this.x = Settings.sizeX - this.vel
+
+    if (this.y >= Settings.sizeY) this.y = 0
+
+    if (this.y < 0) this.y = Settings.sizeY - this.vel
   }
 
   manageTail() {
@@ -76,7 +69,7 @@ export default class Player extends Point implements IDrawable, IGameObject {
       Settings.ctx.fillRect(
         this.tail[i].x,
         this.tail[i].y,
-        Settings.boxSize * 2,
+        Settings.boxSize,
         Settings.boxSize
       )
     }
@@ -84,11 +77,6 @@ export default class Player extends Point implements IDrawable, IGameObject {
 
   draw(): void {
     Settings.ctx.fillStyle = 'blue'
-    Settings.ctx.fillRect(
-      this.x,
-      this.y,
-      Settings.boxSize * 2,
-      Settings.boxSize
-    )
+    Settings.ctx.fillRect(this.x, this.y, Settings.boxSize, Settings.boxSize)
   }
 }

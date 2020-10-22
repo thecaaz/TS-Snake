@@ -9,26 +9,20 @@ export default class Apple extends Point implements IDrawable, IGameObject {
 
   constructor(player: Player) {
     let x = Settings.sizeX * Math.random()
-    x = Math.round(x / 10) * 10
-    if (x % 20 != 0) {
-      x = x - 10
-    }
+    x = Math.round(x / Settings.vel) * Settings.vel
 
     let y = Settings.sizeY * Math.random()
-    y = Math.round(y / 10) * 10
+    y = Math.round(y / Settings.vel) * Settings.vel
     super(x, y)
     this.player = player
   }
 
   move() {
     let x = Settings.sizeX * Math.random()
-    x = Math.round(x / 10) * 10
-    if (x % 20 != 0) {
-      x = x - 10
-    }
+    x = Math.round(x / Settings.vel) * Settings.vel
 
     let y = Settings.sizeY * Math.random()
-    y = Math.round(y / 10) * 10
+    y = Math.round(y / Settings.vel) * Settings.vel
 
     this.x = x
     this.y = y
@@ -36,12 +30,7 @@ export default class Apple extends Point implements IDrawable, IGameObject {
 
   draw(): void {
     Settings.ctx.fillStyle = 'red'
-    Settings.ctx.fillRect(
-      this.x,
-      this.y,
-      Settings.boxSize * 2,
-      Settings.boxSize
-    )
+    Settings.ctx.fillRect(this.x, this.y, Settings.boxSize, Settings.boxSize)
   }
 
   tick() {

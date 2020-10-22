@@ -18,11 +18,11 @@ class Settings {
 
     this.fps = 5
 
-    this.sizeX = 300
-    this.sizeY = 150
-    this.boxSize = 9
+    this.sizeX = 500
+    this.sizeY = 500
+    this.boxSize = 18
 
-    this.vel = 10
+    this.vel = 20
 
     this.tail = []
     this.tailLength = 4

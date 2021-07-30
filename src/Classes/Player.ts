@@ -63,6 +63,11 @@ export default class Player extends Point implements IDrawable, IGameObject {
     while (this.tail.length > this.tailLength) {
       this.tail.shift()
     }
+  }
+
+  draw(): void {
+    Settings.ctx.fillStyle = 'blue'
+    Settings.ctx.fillRect(this.x, this.y, Settings.boxSize, Settings.boxSize)
 
     for (let i = 0; i < this.tail.length; i++) {
       Settings.ctx.fillStyle = 'blue'
@@ -74,9 +79,8 @@ export default class Player extends Point implements IDrawable, IGameObject {
       )
     }
   }
-
-  draw(): void {
-    Settings.ctx.fillStyle = 'blue'
-    Settings.ctx.fillRect(this.x, this.y, Settings.boxSize, Settings.boxSize)
+  
+  eat() {
+    this.tailLength++;
   }
 }

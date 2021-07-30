@@ -36,7 +36,7 @@ export default class Apple extends Point implements IDrawable, IGameObject {
   tick() {
     if (this.player.x == this.x && this.player.y == this.y) {
       this.move()
-      this.player.tailLength = this.player.tailLength + 1
+      this.player.eat()
     }
   }
 }
